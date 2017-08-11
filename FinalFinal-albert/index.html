@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+  <title>Albert Chang CS290-400 Database Assignment (the last one)</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+	
+<h1>Getting Pumped</h1>
+<p>Here is your information on pumping. For the past,  the present, and the soon-to-be present.</p>
+
+<form id = "newTaskForm" action = "/" method = "POST">
+  <fieldset>
+    <legend>Add a new workout</legend>
+    <p>You ready to get pumped? Enter the workout info below. Note that the name can't be empty. Reps must be 1 or higher (no 0 rep exercises) and weight should be 0 or higher. No magical negative weights here.</p>
+    <label for = "name">Name:</label>
+    <input type = "text" name = "name" id = "nameField">
+    <br>
+    <label for = "repetitions">Reps:</label>
+    <input type = "number" name = "repetitions" id = "repField" min = 1 step = 1>
+    <br>
+    <label for = "weight">Weight:</label>
+    <input type = "number" name = "weight" id = "weightField" step = 1>
+    <br>
+    <label for = "unit">Unit (lb or kg):</label>
+    <label>
+      <input id = "pound" type="radio" name="unit" value=true>pounds (lb)
+    </label>
+    <label>
+      <input id = "kilo" type="radio" name="unit" value=false>kilograms (kg)
+    </label>
+    <br>
+    <label for = "date">Date:</label>
+    <input type = "date" name = "date" id = "dateField">
+    <br>
+    <button id = "submitNewButton" type = "submit" name = "postAction" value = "submitNew">submit</button>
+  </fieldset>
+</form>
+
+<section class = "tinytext">
+<p id = "error-message">Error messages will appear here.</p>
+</section>
+
+<div id = "table-div"></div>
+
+<script src = "/js/client.js"></script>
+</body>
+</html>

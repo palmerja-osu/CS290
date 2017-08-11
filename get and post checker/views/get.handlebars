@@ -1,0 +1,17 @@
+<h1>GET Request Received</h1>
+<table>
+	{{#if dataList.length}}
+		<tr>
+			<th style="padding:10px;border:1px solid black;">Parameter Name</th>
+			<th style="padding:10px;border:1px solid black;">Parameter Value</th>
+		</tr>
+	{{/if}}
+	{{#each dataList}}
+		<tr>
+			<td style="padding:10px;border:1px solid black;">{{this.name}}</td>
+			<td style="padding:10px;border:1px solid black;">{{this.value}}</td>
+		</tr>
+	{{/each}}
+</table>
+
+

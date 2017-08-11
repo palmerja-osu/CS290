@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+   <head>
+	<title>workout time</title>
+      <meta charset="UTF-8">
+   </head>
+   <body>
+   <script src="node_modules/require.js"></script>
+    <script src="node_modules/express/index.js"></script>
+	
+   <h1>Time to Get in Shape</h1>
+	<h4>work pl TEST TESTz</h4>
+
+<form id = "newTaskForm" action="/" method="post">
+  <label for="Your Data">Your Exercise Data:</label>
+  <input id="name" type="text" name="name" placeholder="exercise name">
+    <input id="reps" type="text" name="reps" placeholder="reps">
+    <input id="weight" type="text" name="weight" placeholder="weight">
+    <input id="date" type="text" name="date" placeholder="date">
+    
+<input id="lbs" type="number" name="lbs" placeholder="0 for kg or 1 for lbs">
+    
+  <input type="submit" name="Exercise" id="exercise" value="add">
+</form>
+
+
+
+
+
+<table id="tabledata">
+    
+    <trow>
+        <th>Exercise Name</th>
+        <th>Reps</th>
+        <th>Weight</th>
+        <th>Date</th>
+        <th>lbs/kg</th>
+    
+    
+    </trow>
+
+</table>
+            <script src="public/script.js"></script>
+
+
+
+   </body>
+</html>

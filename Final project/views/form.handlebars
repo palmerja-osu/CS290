@@ -1,0 +1,40 @@
+<h1>Time to Make Changes</h1>
+
+
+
+<table>
+    <thead>
+        <trow>
+            <th>Exercise Name</th>
+            <th>Reps</th>
+            <th>Weight</th>
+            <th>Date</th>
+            <th>lbs/kg</th>
+
+
+        </trow>
+    </thead>
+    <tbody >
+        {{#if edit}}
+        {{#each edit}}
+        <tr id="row{{this.id}}">
+            <td>{{this.name}}</td>
+            <td>{{this.reps}}</td>
+            <td>{{this.weight}}</td>
+            <td>{{this.date}}</td>
+            <td>{{this.lbs}}</td>
+            <td>
+                <form method="post">
+                    <input type="hidden" name="id" value="{{this.id}}">
+                    <input type="submit" name="edit" value="edit">
+                    <input  type="submit" name="deleted" value="delete">
+                </form>
+            </td>
+        </tr>
+        {{/each}} {{/if}}
+    </tbody>
+</body>
+
+</table>
+
+<script src = "public/script.js"></script>

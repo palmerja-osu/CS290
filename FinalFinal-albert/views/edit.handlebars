@@ -1,0 +1,87 @@
+{{!--
+
+Albert Chang CS290-400 Final? Assignment
+This template has many #if scattered throughout. After my switch to using AJAX for the form, I'm not sure it's necessary.
+(I could handle all of this in plain JavaScript by simply making helpers for each field, like I did for the date.)
+
+In any case, the purpose of those #if, even if they're not necessary now, was to maintain the null-ness of null values.
+The name field doesn't get an #if because name has a not-null constraint.
+If things are working properly, the name should always be a valid string to pass to value.
+
+The radio buttons for lbs and kg are handled in a peculiar way. {{#if lbs}} evaluates to true if lbs is 1.
+
+If it evaluates to false though, it's not necessarily kg. It could be null.
+To handle this, there's an extra field (used only for edits, and not in the database) of "lbnull".
+If lbnull is true, it means lbs is null. If lbs is null, then the super special third option is checked.
+
+The super special third option mentioned above actually works, if you're wondering. So lbs can be set to null again.
+I want to discourage it, but I'm making this a full-featured database application.
+Even if the features are counterproductive.
+
+Weight uses a similar check, because I allow weight to be 0. (But not reps. Nobody does a 0-rep exercise. That's just doing nothing. 0-weight could be justified for deep space exercises.) I recently made a change to allow negative weights. It's still discouraged.
+
+The same check is done for reps for good measure, even though it will never be used. (Not allowing 0 reps means reps can never evaluate to false unless it's null.)
+
+That last check could come into play if you break the interface of my program to insert a workout with 0 reps. I'd prefer if you didn't, but I'm prepared if you do.
+
+I mentioned this in "edit.js" already, but the tinytext section for errors was added later.
+After making the switch to AJAX, I figured I might as well display messages here too.
+
+--}}
+
+<h1>Getting Pumped</h1>
+<p>Editing a workout. Improve the magnitude of the pumping.</p>
+
+<form id = "editTaskForm" method = "POST" action = "/">
+  <fieldset>
+    <legend>Improve this workout</legend>
+    <p>Edit the info below. Name still can't be empty. You can null out other fields if you want, but please don't do that. You're here to get pumped, not to hide your shame.</p>
+    <label for = "name">Name:</label>
+    <input type = "text" name = "name" id = "nameField" value = {{name}}>
+    <br>
+    <label for = "reps">Reps:</label>
+    <input type = "number" name = "reps" id = "repField" min = 1 
+    {{#unless nullreps}}
+      value = {{reps}} 
+    {{/unless}}>
+    <br>
+    <label for = "weight">Weight:</label>
+    <input type = "number" name = "weight" id = "weightField"
+    {{#unless nullweight}}
+      value = {{weight}} 
+    {{/unless}}>
+    <br>
+    <label for = "lbs">Unit (lb or kg):</label>
+    <label>
+      <input id = "pound" type="radio" name="lbs" value=1 {{#if lbs}}checked = "checked"{{/if}}>pounds (lb)
+    </label>
+    <label>
+      <input id = "kilo" type="radio" name="lbs" value=0 
+      {{#unless lbs}}{{#unless lbnull}}
+      checked = "checked"
+      {{/unless}}{{/unless}}>kilograms (kg)
+    </label>
+    <label>
+      <input id = "nullUnit" type="radio" name="lbs" value=2 
+      {{#if lbnull}}
+      checked = "checked"
+      {{/if}}>null (seriously, don't select this)
+    </label>
+    <br>
+    <label for = "date">Date:</label>
+    <input type = "date" name = "date" id = "dateField" value = {{dateParser date}}>
+    <br>
+    <button id = "submitEditButton" type = "submit" name = "postAction" value = "edit">save</button>
+    <input type = "hidden" id = "hiddenID" name = "taskID" value = {{id}}>
+  </fieldset>
+</form>
+
+<section class = "tinytext">
+<p id = "error-message">Error messages will appear here.</p>
+</section>
+
+<section class = "tinytext">
+<p>For grading purposes, note that this is a separate page. Sometimes the refresh happens so fast it's hard to catch. Adding and deleting data on the main table page happens without a refresh, but this edit page is a different page and the browser refreshes to get here (and back to the main table page). I think this edit page form could easily be handled with JavaScript DOM manipulation to alter the main page's form, but I think having a separate page is preferable. It helps to ensure that the entire table data is loaded again every time you finish editing and that null values really are null (rather than just blank spaces that are actually 0 in the database).</p>
+</section>
+
+<script src = "/js/edit.js"></script>
